@@ -8,7 +8,7 @@ const mysql = {
         password: process.env.MYSQL_PASS,
         database: process.env.MYSQL_DATABASE
     },
-    debug     : true,
+    debug     : false,
     pool      : {min: 1, max: 30}
 };
 
@@ -18,7 +18,22 @@ const redis = {
     db  : process.env.REDIS_DB
 };
 
+const data_conf = {
+    statistics        : {
+        0: "每日",
+        1: "每月",
+        2: "每年"
+    },
+    freight_forwarding: {
+        0: "未知",
+        1: "中邮",
+        2: "燕文",
+        3: "递四方"
+    }
+};
+
 module.exports = {
     mysql,
-    redis
+    redis,
+    data_conf
 };

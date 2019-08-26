@@ -37,7 +37,31 @@ let getMonth = function () {
     return [startMonth, endMonth];
 };
 
+/**
+ * 获取参数
+ *
+ * @param ctx
+ * @private
+ */
+let getParam = function (ctx) {
+    let query  = {},
+        method = ctx.request.method;
+
+    switch (method) {
+        case 'GET':
+            query = ctx.request.query;
+            break;
+        default:
+        case 'POST':
+            query = ctx.request.body;
+            break;
+    }
+
+    return query;
+}
+
 module.exports = {
     log,
-    getMonth
+    getMonth,
+    getParam
 };

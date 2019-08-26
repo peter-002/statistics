@@ -2,8 +2,23 @@ const authCtrl = require('../common/auth'),
       service = require('../../common/services');
 
 class order extends authCtrl {
-    static async statisticsMonth() {
-        return await service.orderService.getMonthList();
+    /**
+     * 折线图
+     *
+     * @param ctx
+     * @returns {Promise<*>}
+     */
+    static async lineCharts(ctx) {
+        return await service.orderService.getStatisticsLine(ctx);
+    }
+
+    /**
+     * 饼状图
+     *
+     * @returns {Promise<*>}
+     */
+    static async pieCharts() {
+        return await service.orderService.getStatisticsPie();
     }
 }
 

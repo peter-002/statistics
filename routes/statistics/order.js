@@ -1,10 +1,20 @@
-const router = require('koa-router')();
+const router = require('koa-router')(),
+      config = require('../../utils/config');
 
-router.get('/order', async (ctx) => {
+router.get('/line', async (ctx) => {
+    let data = await ctx.ctrl.order.lineCharts(ctx);
 
-    let data = ctx.body = await ctx.ctrl.order.statisticsMonth();
+    await ctx.render('statistics/line', {
+        data           : JSON.stringify(data),
+        statistics_conf: config.data_conf.statistics,
+        url_param      : ctx.request.query
+    });
+});
 
-    await ctx.render('statistics/order', {
+router.get('/pie', async (ctx) => {
+    let data = await ctx.ctrl.order.pieCharts();
+
+    await ctx.render('statistics/pie', {
         data: JSON.stringify(data)
     });
 });
